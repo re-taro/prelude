@@ -17,7 +17,7 @@ const { root } = path.parse(process.cwd());
  * @returns {boolean}
  */
 function external(id) {
-  return !id.startsWith(".") && !id.startsWith(root);
+	return !id.startsWith(".") && !id.startsWith(root);
 }
 
 /**
@@ -26,37 +26,37 @@ function external(id) {
  * @returns {import("rollup").RollupOptions}
  */
 function createESMConfig(input, output) {
-  return {
-    external,
-    input,
-    output: {
-      file: output,
-      format: "esm",
-      sourcemap: true,
-    },
-    plugins: [
-      esbuild({
-        target: "es2022",
-      }),
-      nodeResolve({ extensions }),
-      replace({
-        "import.meta.vitest": "undefined",
-        "preventAssignment": false,
-      }),
-      terser({
-        compress: {
-          ecma: 2020,
-          passes: 5,
-        },
-        ecma: 2020,
-        format: {
-          comments: false,
-        },
-        nameCache: {},
-        toplevel: true,
-      }),
-    ],
-  };
+	return {
+		external,
+		input,
+		output: {
+			file: output,
+			format: "esm",
+			sourcemap: true,
+		},
+		plugins: [
+			esbuild({
+				target: "es2022",
+			}),
+			nodeResolve({ extensions }),
+			replace({
+				"import.meta.vitest": "undefined",
+				"preventAssignment": false,
+			}),
+			terser({
+				compress: {
+					ecma: 2020,
+					passes: 5,
+				},
+				ecma: 2020,
+				format: {
+					comments: false,
+				},
+				nameCache: {},
+				toplevel: true,
+			}),
+		],
+	};
 }
 
 const srcPath = path.join(process.cwd(), "src");
@@ -65,21 +65,21 @@ const srcPath = path.join(process.cwd(), "src");
  * @returns {string[]}
  */
 function files() {
-  try {
-    const items = fs.readdirSync(srcPath);
+	try {
+		const items = fs.readdirSync(srcPath);
 
-    const fileNames = items
-      .filter(item => fs.statSync(path.join(srcPath, item)).isFile())
-      .map(item => path.parse(item).name);
+		const fileNames = items
+			.filter(item => fs.statSync(path.join(srcPath, item)).isFile())
+			.map(item => path.parse(item).name);
 
-    return fileNames;
-  }
-  catch (err) {
-    console.error("Error reading directory:", err);
-    return [];
-  }
+		return fileNames;
+	}
+	catch (err) {
+		console.error("Error reading directory:", err);
+		return [];
+	}
 }
 
 export default defineConfig(files().filter(file => file !== "types").flatMap(file => [
-  createESMConfig(`src/${file}.ts`, `dist/${file}.js`),
+	createESMConfig(`src/${file}.ts`, `dist/${file}.js`),
 ]));

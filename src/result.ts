@@ -37,7 +37,7 @@ export const err = <E>(e: E): Err<E> => [errSymbol, e];
  * @returns Whether the result is an `Ok`.
  */
 export function isOk<T, E>(res: Result<T, E>): res is Ok<T> {
-  return res[0] === okSymbol;
+	return res[0] === okSymbol;
 }
 
 /**
@@ -47,7 +47,7 @@ export function isOk<T, E>(res: Result<T, E>): res is Ok<T> {
  * @returns Whether the result is an `Err`.
  */
 export function isErr<T, E>(res: Result<T, E>): res is Err<E> {
-  return res[0] === errSymbol;
+	return res[0] === errSymbol;
 }
 
 /**
@@ -58,15 +58,15 @@ export function isErr<T, E>(res: Result<T, E>): res is Err<E> {
  * @returns The wrapped function.
  */
 export function wrapThrowable<E>(catcher: (err: unknown) => E) {
-  return <A extends unknown[], R>(body: (...args: A) => R) =>
-    (...args: A): Result<R, E> => {
-      try {
-        return ok(body(...args));
-      }
-      catch (error: unknown) {
-        return err(catcher(error));
-      }
-    };
+	return <A extends unknown[], R>(body: (...args: A) => R) =>
+		(...args: A): Result<R, E> => {
+			try {
+				return ok(body(...args));
+			}
+			catch (error: unknown) {
+				return err(catcher(error));
+			}
+		};
 }
 
 /**
@@ -77,15 +77,15 @@ export function wrapThrowable<E>(catcher: (err: unknown) => E) {
  * @returns The wrapped function.
  */
 export function wrapAsyncThrowable<E>(catcher: (err: unknown) => E) {
-  return <A extends unknown[], R>(body: (...args: A) => Promise<R>) =>
-    async (...args: A): Promise<Result<R, E>> => {
-      try {
-        return ok(await body(...args));
-      }
-      catch (error: unknown) {
-        return err(catcher(error));
-      }
-    };
+	return <A extends unknown[], R>(body: (...args: A) => Promise<R>) =>
+		async (...args: A): Promise<Result<R, E>> => {
+			try {
+				return ok(await body(...args));
+			}
+			catch (error: unknown) {
+				return err(catcher(error));
+			}
+		};
 }
 
 /**
@@ -97,8 +97,8 @@ export function wrapAsyncThrowable<E>(catcher: (err: unknown) => E) {
  * @returns The mapped value.
  */
 export function either<E, R>(g: (e: E) => R) {
-  return <T>(f: (t: T) => R) => (res: Result<T, E>): R =>
-    isOk(res) ? f(res[1]) : g(res[1]);
+	return <T>(f: (t: T) => R) => (res: Result<T, E>): R =>
+		isOk(res) ? f(res[1]) : g(res[1]);
 }
 
 /**
@@ -108,10 +108,10 @@ export function either<E, R>(g: (e: E) => R) {
  * @returns The unwrapped item.
  */
 export function unwrap<T, E>(res: Result<T, E>): T {
-  if (isErr(res)) {
-    throw new Error("unwrapped Err");
-  }
-  return res[1];
+	if (isErr(res)) {
+		throw new Error("unwrapped Err");
+	}
+	return res[1];
 }
 
 /**
@@ -121,10 +121,10 @@ export function unwrap<T, E>(res: Result<T, E>): T {
  * @returns The unwrapped item.
  */
 export function unwrapErr<T, E>(res: Result<T, E>): E {
-  if (isOk(res)) {
-    throw new Error("unwrapped Ok");
-  }
-  return res[1];
+	if (isOk(res)) {
+		throw new Error("unwrapped Ok");
+	}
+	return res[1];
 }
 
 /**
@@ -135,8 +135,8 @@ export function unwrapErr<T, E>(res: Result<T, E>): E {
  * @returns `resB` if `resA` is a `Ok`.
  */
 export function and<U, E>(resB: Result<U, E>) {
-  return <T>(resA: Result<T, E>): Result<U, E> =>
-    isOk(resA) ? resB : resA;
+	return <T>(resA: Result<T, E>): Result<U, E> =>
+		isOk(resA) ? resB : resA;
 }
 
 /**
@@ -147,7 +147,7 @@ export function and<U, E>(resB: Result<U, E>) {
  * @returns `fn()` if `resA` is an `Ok`.
  */
 export function andThen<T, U, E>(fn: (t: T) => Result<U, E>) {
-  return (resA: Result<T, E>): Result<U, E> => isOk(resA) ? fn(resA[1]) : resA;
+	return (resA: Result<T, E>): Result<U, E> => isOk(resA) ? fn(resA[1]) : resA;
 }
 
 /**
@@ -157,8 +157,8 @@ export function andThen<T, U, E>(fn: (t: T) => Result<U, E>) {
  * @returns `fn()` if `res` is an `Ok`.
  */
 export function asyncAndThen<T, U, F>(fn: (value: T) => Promise<Result<U, F>>) {
-  return <E extends F>(res: Result<T, E>): Promise<Result<U, E | F>> =>
-    isOk(res) ? fn(res[1]) : Promise.resolve(res);
+	return <E extends F>(res: Result<T, E>): Promise<Result<U, E | F>> =>
+		isOk(res) ? fn(res[1]) : Promise.resolve(res);
 }
 
 /**
@@ -169,8 +169,8 @@ export function asyncAndThen<T, U, F>(fn: (value: T) => Promise<Result<U, F>>) {
  * @returns `resA` or `resB`.
  */
 export function or<T, E>(resB: Result<T, E>) {
-  return <F>(resA: Result<T, F>): Result<T, E> =>
-    isErr(resA) ? resB : resA;
+	return <F>(resA: Result<T, F>): Result<T, E> =>
+		isErr(resA) ? resB : resA;
 }
 
 /**
@@ -181,44 +181,44 @@ export function or<T, E>(resB: Result<T, E>) {
  * @returns `resA` or `fn()`.
  */
 export function orElse<F, T, E>(fn: (error: F) => Result<T, E>) {
-  return (resA: Result<T, F>): Result<T, E> => isErr(resA) ? fn(resA[1]) : resA;
+	return (resA: Result<T, F>): Result<T, E> => isErr(resA) ? fn(resA[1]) : resA;
 }
 
 if (import.meta.vitest) {
-  const { describe, expect, test } = import.meta.vitest;
+	const { describe, expect, test } = import.meta.vitest;
 
-  describe("Result", () => {
-    test("wrapThrowable", () => {
-      const safeSqrt = wrapThrowable(err => err as Error)(
-        (x: number) => {
-          if ((x < 0)) {
-            throw new RangeError("x must be positive or a zero");
-          }
-          return Math.sqrt(x);
-        },
-      );
+	describe("Result", () => {
+		test("wrapThrowable", () => {
+			const safeSqrt = wrapThrowable(err => err as Error)(
+				(x: number) => {
+					if ((x < 0)) {
+						throw new RangeError("x must be positive or a zero");
+					}
+					return Math.sqrt(x);
+				},
+			);
 
-      expect(safeSqrt(4)).toEqual(ok(2));
-      expect(safeSqrt(0)).toEqual(ok(0));
-      expect(
-        safeSqrt(-1),
-      ).toEqual(err(new RangeError("x must be positive or a zero")));
-    });
-    test("wrapAsyncThrowable", async () => {
-      const safeSqrt = wrapAsyncThrowable(err => err as Error)(
-        async (x: number) => {
-          if ((x < 0)) {
-            return Promise.reject(new RangeError("x must be positive or a zero"));
-          }
-          return Math.sqrt(x);
-        },
-      );
+			expect(safeSqrt(4)).toEqual(ok(2));
+			expect(safeSqrt(0)).toEqual(ok(0));
+			expect(
+				safeSqrt(-1),
+			).toEqual(err(new RangeError("x must be positive or a zero")));
+		});
+		test("wrapAsyncThrowable", async () => {
+			const safeSqrt = wrapAsyncThrowable(err => err as Error)(
+				async (x: number) => {
+					if ((x < 0)) {
+						return Promise.reject(new RangeError("x must be positive or a zero"));
+					}
+					return Math.sqrt(x);
+				},
+			);
 
-      expect(await safeSqrt(4)).toEqual(ok(2));
-      expect(await safeSqrt(0)).toEqual(ok(0));
-      expect(
-        await safeSqrt(-1),
-      ).toEqual(err(new RangeError("x must be positive or a zero")));
-    });
-  });
+			expect(await safeSqrt(4)).toEqual(ok(2));
+			expect(await safeSqrt(0)).toEqual(ok(0));
+			expect(
+				await safeSqrt(-1),
+			).toEqual(err(new RangeError("x must be positive or a zero")));
+		});
+	});
 }

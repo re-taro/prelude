@@ -33,6 +33,7 @@
     "lint": "pnpm run --parallel /^lint:.*/",
     "lint:tsc": "tsc",
     "lint:eslint": "eslint --cache --cache-strategy content .",
+    "lint-fix": "pnpm run lint:eslint --fix",
     "test": "vitest",
     "release": "semantic-release"
   },
