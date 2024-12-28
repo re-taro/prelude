@@ -1,0 +1,80 @@
+name: CI
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  run_lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Lint
+        run: pnpm lint:eslint
+  run_typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Typecheck
+        run: pnpm lint:tsc
+  run_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Test
+        run: pnpm test
+  run_build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Build
+        run: pnpm build
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - run_lint
+      - run_typecheck
+      - run_test
+      - run_build
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Build
+        run: pnpm build
+      - name: Release
+        run: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
