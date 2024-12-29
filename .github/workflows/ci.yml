@@ -57,16 +57,17 @@ jobs:
       - run_typecheck
       - run_test
       - run_build
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
     steps:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Setup | GitHub App
+        id: bot
+        uses: re-taro/actions/gen-installation-token@v3.6.0
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Setup | Node.js
         uses: re-taro/actions/setup-node@v3.6.0
         with:
@@ -76,5 +77,14 @@ jobs:
       - name: Release
         run: pnpm release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.bot.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Revoke GitHub Apps token
+        env:
+          GITHUB_TOKEN: ${{ steps.bot.outputs.token }}
+        run: |
+          curl --location --silent --request DELETE \
+            --url "${GITHUB_API_URL}/installation/token" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Authorization: Bearer ${GITHUB_TOKEN}"
