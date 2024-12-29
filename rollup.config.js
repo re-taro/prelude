@@ -14,7 +14,7 @@ const { root } = path.parse(process.cwd());
 
 /**
  * @param {string} id
- * @returns {boolean}
+ * @returns {boolean} Whether the module is external
  */
 function external(id) {
 	return !id.startsWith(".") && !id.startsWith(root);
@@ -23,7 +23,7 @@ function external(id) {
 /**
  * @param {string} input
  * @param {string} output
- * @returns {import("rollup").RollupOptions}
+ * @returns {import("rollup").RollupOptions} Rollup configuration
  */
 function createESMConfig(input, output) {
 	return {
@@ -62,7 +62,7 @@ function createESMConfig(input, output) {
 const srcPath = path.join(process.cwd(), "src");
 
 /**
- * @returns {string[]}
+ * @returns {string[]} List of files in the src directory
  */
 function files() {
 	try {
