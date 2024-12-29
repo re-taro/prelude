@@ -1,7 +1,7 @@
 {
   "name": "@re-taro/prelude",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "packageManager": "pnpm@9.15.2",
   "description": "A collection of utility functions for TypeScript",
   "author": "Rintaro Itokawa <me@re-taro.dev> (https://re-taro.dev)",
