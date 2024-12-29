@@ -4,7 +4,6 @@ import path from "node:path";
 import process from "node:process";
 import fs from "node:fs";
 import { defineConfig } from "rollup";
-import terser from "@rollup/plugin-terser";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import esbuild from "rollup-plugin-esbuild";
@@ -42,18 +41,6 @@ function createESMConfig(input, output) {
 			replace({
 				"import.meta.vitest": "undefined",
 				"preventAssignment": false,
-			}),
-			terser({
-				compress: {
-					ecma: 2020,
-					passes: 5,
-				},
-				ecma: 2020,
-				format: {
-					comments: false,
-				},
-				nameCache: {},
-				toplevel: true,
 			}),
 		],
 	};

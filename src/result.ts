@@ -1,30 +1,45 @@
+/* eslint-disable node/handle-callback-err */
+
 import type { InferAsyncErrTypes, InferAsyncOkTypes, InferErrTypes, InferOkTypes } from "./_internal/result.js";
 
+// @__NO_SIDE_EFFECTS__
 export function ok<T, E = never>(value: T): Ok<T, E>;
+// @__NO_SIDE_EFFECTS__
 // eslint-disable-next-line unused-imports/no-unused-vars
 export function ok<T extends void = void, E = never>(value: void): Ok<void, E>;
+// @__NO_SIDE_EFFECTS__
 export function ok<T, E = never>(value: T): Ok<T, E> {
 	return new Ok(value);
 }
 
+// @__NO_SIDE_EFFECTS__
 export function err<T = never, E extends string = string>(err: E): Err<T, E>;
+// @__NO_SIDE_EFFECTS__
 export function err<T = never, E = unknown>(err: E): Err<T, E>;
+// @__NO_SIDE_EFFECTS__
 // eslint-disable-next-line unused-imports/no-unused-vars
 export function err<T = never, E extends void = void>(err: void): Err<T, void>;
+// @__NO_SIDE_EFFECTS__
 export function err<T = never, E = unknown>(err: E): Err<T, E> {
 	return new Err(err);
 }
 
+// @__NO_SIDE_EFFECTS__
 export function okAsync<T, E = never>(value: T): ResultAsync<T, E>;
+// @__NO_SIDE_EFFECTS__
 // eslint-disable-next-line unused-imports/no-unused-vars
 export function okAsync<T extends void = void, E = never>(value: void): ResultAsync<void, E>;
+// @__NO_SIDE_EFFECTS__
 export function okAsync<T, E = never>(value: T): ResultAsync<T, E> {
 	return new ResultAsync(Promise.resolve(new Ok<T, E>(value)));
 }
 
+// @__NO_SIDE_EFFECTS__
 export function errAsync<T = never, E = unknown>(err: E): ResultAsync<T, E>;
+// @__NO_SIDE_EFFECTS__
 // eslint-disable-next-line unused-imports/no-unused-vars
 export function errAsync<T = never, E extends void = void>(err: void): ResultAsync<T, void>;
+// @__NO_SIDE_EFFECTS__
 export function errAsync<T = never, E = unknown>(err: E): ResultAsync<T, E> {
 	return new ResultAsync(Promise.resolve(new Err<T, E>(err)));
 }
@@ -347,7 +362,6 @@ export class Ok<T, E> implements IResult<T, E> {
 }
 
 export class Err<T, E> implements IResult<T, E> {
-	// eslint-disable-next-line node/handle-callback-err
 	constructor(readonly error: E) { }
 
 	isOk(): this is Ok<T, E> {
