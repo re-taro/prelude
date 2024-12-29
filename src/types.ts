@@ -1,29 +1,4 @@
 /**
- * Promise, or maybe not
- */
-export type Awaitable<T> = PromiseLike<T> | T;
-
-/**
- * Null or whatever
- */
-export type Nullable<T> = T | null | undefined;
-
-/**
- * Array, or not yet
- */
-export type Arrayable<T> = Array<T> | T;
-
-/**
- * Function
- */
-export type Fn<T = void> = () => T;
-
-/**
- * Constructor
- */
-export type Constructor<T = void> = new (...args: any[]) => T;
-
-/**
  * Infers the element type of an array
  */
 export type ElementOf<T> = T extends (infer E)[] ? E : never;
@@ -115,12 +90,15 @@ if (import.meta.vitest) {
 		test("UnionToIntersection", () => {
 			expectTypeOf<UnionToIntersection<{ a: string } | { b: number }>>().toEqualTypeOf<{ a: string } & { b: number }>();
 		});
+
 		test("MergeInsertions", () => {
 			expectTypeOf<MergeInsertions<{ a: { b: number } } & { a: { c: string } }>>().toEqualTypeOf<{ a: { b: number; c: string } }>();
 		});
+
 		test("DeepMerge", () => {
 			expectTypeOf<DeepMerge<{ a: { b: string } }, { a: { c: number } }>>().toEqualTypeOf<{ a: { b: string; c: number } }>();
 		});
+
 		test("Tagged", () => {
 			type JsonOf<T> = Tagged<string, "JSON", T>;
 
@@ -136,6 +114,16 @@ if (import.meta.vitest) {
 			const parsed = parse(x);
 
 			assertType<{ hello: string }>(parsed);
+		});
+
+		test("ElementOf", () => {
+			const _arr = ["a", "b", "c"];
+
+			expectTypeOf<ElementOf<typeof _arr>>().toEqualTypeOf<string>();
+		});
+
+		test("ArgumentsType", () => {
+			expectTypeOf<ArgumentsType<(a: string, b: number) => void>>().toEqualTypeOf<[string, number]>();
 		});
 	});
 }
