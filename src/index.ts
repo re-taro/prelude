@@ -31,6 +31,7 @@ export type {
 	ArgumentsType,
 	DeepMerge,
 	ElementOf,
+	EnumLike,
 	GetTagMetadata,
 	MergeInsertions,
 	Tagged,

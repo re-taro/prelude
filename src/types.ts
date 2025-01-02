@@ -83,6 +83,25 @@ export type Tagged<Type, TagName extends PropertyKey, TagMetadata = never> = Tag
  */
 export type GetTagMetadata<Type extends Tag<TagName, unknown>, TagName extends PropertyKey> = Type[typeof tag][TagName];
 
+/**
+ * Create enum-like type definition.
+ *
+ * @example
+ * ```ts
+ * const FooType = {
+ *   Bar: 'bar',
+ *   Baz: 'baz',
+ * } as const;
+ *
+ * type FooType = EnumLike<typeof FooType>;
+ * ```
+ */
+export type EnumLike<T extends object> = string extends T[keyof T]
+	? never
+	: number extends T[keyof T]
+		? never
+		: T[keyof T];
+
 if (import.meta.vitest) {
 	const { assertType, describe, expectTypeOf, test } = import.meta.vitest;
 
@@ -124,6 +143,18 @@ if (import.meta.vitest) {
 
 		test("ArgumentsType", () => {
 			expectTypeOf<ArgumentsType<(a: string, b: number) => void>>().toEqualTypeOf<[string, number]>();
+		});
+
+		test("EnumLike", () => {
+			const FooType = {
+				Bar: "bar",
+				Baz: "baz",
+			} as const;
+
+			type FooType = EnumLike<typeof FooType>;
+
+			assertType<FooType>("bar");
+			assertType<FooType>("baz");
 		});
 	});
 }
