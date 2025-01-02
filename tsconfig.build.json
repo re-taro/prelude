@@ -7,10 +7,13 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "noEmit": false,
-    "outDir": "./dist",
-    "isolatedDeclarations": true
+    "outDir": "./dist"
+    // "isolatedDeclarations": true
   },
   "include": [
-    "src"
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.bench.ts"
   ]
 }

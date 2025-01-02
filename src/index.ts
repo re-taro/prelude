@@ -1,4 +1,25 @@
 export {
+	createInjector,
+	createScope,
+	molecule,
+	moleculeInterface,
+	onMount,
+	onUnmount,
+	use,
+} from "./inject.js";
+export type {
+	CreateInjectorProps,
+	Molecule,
+	MoleculeConstructor,
+	MoleculeGetter,
+	MoleculeInjector,
+	MoleculeInterface,
+	MoleculeOrInterface,
+	MoleculeScope,
+	ScopeGetter,
+	ScopeTuple,
+} from "./inject.js";
+export {
 	isBoolean,
 	isBrowser,
 	isDate,
