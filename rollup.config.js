@@ -7,6 +7,8 @@ import { defineConfig } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import esbuild from "rollup-plugin-esbuild";
+import typescript from "@rollup/plugin-typescript";
+import { importMetaVitestTransformer } from "./rollup/transformer.js";
 
 const extensions = [".js", ".ts"];
 const { root } = path.parse(process.cwd());
@@ -17,6 +19,48 @@ const { root } = path.parse(process.cwd());
  */
 function external(id) {
 	return !id.startsWith(".") && !id.startsWith(root);
+}
+
+/**
+ * @param {string} input
+ * @param {string} output
+ * @returns {import("rollup").RollupOptions} Rollup configuration
+ */
+function createDTSConfig(input, output) {
+	return {
+		external,
+		input,
+		output: {
+			dir: output,
+		},
+		plugins: [
+			replace({
+				"import.meta.vitest": "undefined",
+				"preventAssignment": false,
+			}),
+			typescript({
+				compilerOptions: {
+					declaration: true,
+					declarationMap: true,
+					emitDeclarationOnly: true,
+					incremental: false,
+					isolatedDeclarations: true,
+					noEmit: false,
+					outDir: output,
+					rootDir: "src",
+				},
+				exclude: ["**/*.bench.ts", "**/testing/*.ts"],
+				transformers: {
+					before: [
+						{
+							factory: program => importMetaVitestTransformer(program),
+							type: "program",
+						},
+					],
+				},
+			}),
+		],
+	};
 }
 
 /**
@@ -68,5 +112,6 @@ function files() {
 }
 
 export default defineConfig(files().filter(file => file !== "types").flatMap(file => [
+	...(file === "index" ? [createDTSConfig(`src/${file}.ts`, "dist")] : []),
 	createESMConfig(`src/${file}.ts`, `dist/${file}.js`),
 ]));

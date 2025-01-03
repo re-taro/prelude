@@ -8,5 +8,6 @@ export default re_taro({
 	files: ["src/**/*.ts"],
 	rules: {
 		"style/yield-star-spacing": ["error", "after"],
+		"ts/no-redeclare": "off",
 	},
 });

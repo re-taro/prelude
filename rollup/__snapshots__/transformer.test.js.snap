@@ -1,0 +1,6 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`importMetaVitestTransformer > should return a transformer factory 1`] = `
+"export {};
+"
+`;
