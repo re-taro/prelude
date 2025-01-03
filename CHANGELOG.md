@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/re-taro/prelude/compare/v1.1.0...v1.2.0) (2025-01-03)
+
+
+### Features
+
+* add EnumLike ([eb34f90](https://github.com/re-taro/prelude/commit/eb34f9035793173a59eeb0e165a3606a501ca356))
+* impl inject ([c68c86c](https://github.com/re-taro/prelude/commit/c68c86cd1c69917f18e1fd44f86523fb4debcc67))
+
 # [1.1.0](https://github.com/re-taro/prelude/compare/v1.0.0...v1.1.0) (2024-12-29)
 
 
