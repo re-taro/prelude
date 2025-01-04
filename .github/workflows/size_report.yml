@@ -1,0 +1,66 @@
+name: Size report
+
+on:
+  workflow_run:
+    workflows: [Size data]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  run_report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Download Size Data
+        uses: dawidd6/action-download-artifact@v7
+        with:
+          name: size-data
+          path: temp/size
+      - name: Read PR Number
+        id: pr-number
+        run: |
+          pr_number=$(cat temp/size/number.txt)
+          echo "content=$pr_number" >> $GITHUB_OUTPUT
+      - name: Read base branch
+        id: pr-base
+        run: |
+          pr_base=$(cat temp/size/base.txt)
+          echo "content=$pr_base" >> $GITHUB_OUTPUT
+      - name: Download Previous Size Data
+        uses: dawidd6/action-download-artifact@v7
+        with:
+          branch: ${{ steps.pr-base.outputs.content }}
+          workflow: size-data.yml
+          event: push
+          name: size-data
+          path: temp/size-prev
+          if_no_artifact_found: warn
+      - name: Prepare report
+        run: tsx scripts/report-size.ts > size-report.md
+      - name: Read Size report
+        id: size-report
+        run: |
+          size_report=$(cat size-report.md)
+          echo "content=$size_report" >> $GITHUB_OUTPUT
+      - name: Comment on PR
+        uses: actions/github-script@v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ steps.pr-number.outputs.content }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: ${{ steps.size-report.outputs.content }}
+            })
