@@ -1,0 +1,26 @@
+name: Nightly release
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '!**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup | Node.js
+        uses: re-taro/actions/setup-node@v3.6.0
+        with:
+          node-version-file: .tool-versions
+      - name: Build
+        run: pnpm build
+      - name: Release with pkg-pr-new
+        run: pnpm pkg-pr-new publish --compact --pnpm
