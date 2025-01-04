@@ -1,11 +1,6 @@
 name: Nightly release
 
 on:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '!**'
   pull_request:
     branches:
       - main
