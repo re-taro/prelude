@@ -49,7 +49,7 @@
     "@types/node": "22.13.4",
     "eslint": "9.20.1",
     "eslint-plugin-format": "0.1.3",
-    "jotai": "2.12.0",
+    "jotai": "2.12.1",
     "markdown-table": "3.0.4",
     "picocolors": "1.1.1",
     "pkg-pr-new": "0.0.39",
