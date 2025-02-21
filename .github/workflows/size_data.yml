@@ -29,7 +29,7 @@ jobs:
           echo ${{ github.event.number }} > ./temp/size/number.txt
           echo ${{ github.base_ref }} > ./temp/size/base.txt
       - name: Upload Size Data
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: size-data
           path: temp/size
