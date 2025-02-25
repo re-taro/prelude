@@ -48,8 +48,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       pkg-pr-new:
-        specifier: 0.0.39
-        version: 0.0.39
+        specifier: 0.0.40
+        version: 0.0.40
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -2588,8 +2588,8 @@ packages:
     resolution: {integrity: sha512-C+VUP+8jis7EsQZIhDYmS5qlNtjv2yP4SNtjXK9AP1ZcTRlnSfuumaTnRfYZnYgUUYVIKqL0fRvmUGDV2fmp6g==}
     engines: {node: '>=4'}
 
-  pkg-pr-new@0.0.39:
-    resolution: {integrity: sha512-ItcsHK+4uO0qmjK4RNs6vTWv3xFhbPZd5U6RoYbxRURWNZfH7KvpyqRzaw4GR7de/IjkdHVZHCzQkjnp3VOVdg==}
+  pkg-pr-new@0.0.40:
+    resolution: {integrity: sha512-/JdrhkpXCU4BSpE3KS6pIPaAzcIQQA7YesGjpJThqoqRvNnXcPGRDs678Qfammi8HCkr9HJUcq07/WfSJJMjhg==}
     hasBin: true
 
   pkg-types@1.2.1:
@@ -5821,7 +5821,7 @@ snapshots:
       find-up: 2.1.0
       load-json-file: 4.0.0
 
-  pkg-pr-new@0.0.39:
+  pkg-pr-new@0.0.40:
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
       '@octokit/action': 6.1.0
