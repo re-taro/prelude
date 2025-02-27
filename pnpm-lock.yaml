@@ -57,8 +57,8 @@ importers:
         specifier: 4.34.8
         version: 4.34.8
       rollup-plugin-esbuild:
-        specifier: 6.2.0
-        version: 6.2.0(esbuild@0.25.0)(rollup@4.34.8)
+        specifier: 6.2.1
+        version: 6.2.1(esbuild@0.25.0)(rollup@4.34.8)
       semantic-release:
         specifier: 24.2.3
         version: 24.2.3(typescript@5.7.3)
@@ -1418,9 +1418,6 @@ packages:
   error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
 
-  es-module-lexer@1.5.4:
-    resolution: {integrity: sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==}
-
   es-module-lexer@1.6.0:
     resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
 
@@ -2717,8 +2714,8 @@ packages:
     engines: {node: 20 || >=22}
     hasBin: true
 
-  rollup-plugin-esbuild@6.2.0:
-    resolution: {integrity: sha512-LbkHaCahA6ceyWzAd6md2yajNS+HfZmZ5o58ShkZp0cQeZOnZECG2D2xWFNBq5SF6X6pfMK2udkZ+wRtvpzyVQ==}
+  rollup-plugin-esbuild@6.2.1:
+    resolution: {integrity: sha512-jTNOMGoMRhs0JuueJrJqbW8tOwxumaWYq+V5i+PD+8ecSCVkuX27tGW7BXqDgoULQ55rO7IdNxPcnsWtshz3AA==}
     engines: {node: '>=14.18.0'}
     peerDependencies:
       esbuild: '>=0.18.0'
@@ -3095,8 +3092,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unplugin-utils@0.2.3:
-    resolution: {integrity: sha512-unB2e2ogZwEoMw/X0Gq1vj2jaRKLmTh9wcSEJggESPllcrZI68uO7B8ykixbXqsSwG8r9T7qaHZudXIC/3qvhw==}
+  unplugin-utils@0.2.4:
+    resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
 
   update-browserslist-db@1.1.1:
@@ -4587,8 +4584,6 @@ snapshots:
     dependencies:
       is-arrayish: 0.2.1
 
-  es-module-lexer@1.5.4: {}
-
   es-module-lexer@1.6.0: {}
 
   esbuild@0.21.5:
@@ -5752,7 +5747,7 @@ snapshots:
 
   parse-imports@2.2.1:
     dependencies:
-      es-module-lexer: 1.5.4
+      es-module-lexer: 1.6.0
       slashes: 3.0.12
 
   parse-json@4.0.0:
@@ -5966,14 +5961,14 @@ snapshots:
       glob: 11.0.0
       package-json-from-dist: 1.0.1
 
-  rollup-plugin-esbuild@6.2.0(esbuild@0.25.0)(rollup@4.34.8):
+  rollup-plugin-esbuild@6.2.1(esbuild@0.25.0)(rollup@4.34.8):
     dependencies:
       debug: 4.4.0
       es-module-lexer: 1.6.0
       esbuild: 0.25.0
       get-tsconfig: 4.10.0
       rollup: 4.34.8
-      unplugin-utils: 0.2.3
+      unplugin-utils: 0.2.4
     transitivePeerDependencies:
       - supports-color
 
@@ -6338,7 +6333,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unplugin-utils@0.2.3:
+  unplugin-utils@0.2.4:
     dependencies:
       pathe: 2.0.2
       picomatch: 4.0.2
@@ -6368,7 +6363,7 @@ snapshots:
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
-      es-module-lexer: 1.5.4
+      es-module-lexer: 1.6.0
       pathe: 1.1.2
       vite: 5.4.11(@types/node@22.13.5)(terser@5.37.0)
     transitivePeerDependencies:
