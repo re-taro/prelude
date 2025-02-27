@@ -23,7 +23,7 @@ jobs:
         with:
           node-version-file: .tool-versions
       - name: Download Size Data
-        uses: dawidd6/action-download-artifact@v7
+        uses: dawidd6/action-download-artifact@v9
         with:
           name: size-data
           path: temp/size
@@ -38,7 +38,7 @@ jobs:
           pr_base=$(cat temp/size/base.txt)
           echo "content=$pr_base" >> $GITHUB_OUTPUT
       - name: Download Previous Size Data
-        uses: dawidd6/action-download-artifact@v7
+        uses: dawidd6/action-download-artifact@v9
         with:
           branch: ${{ steps.pr-base.outputs.content }}
           workflow: size-data.yml
