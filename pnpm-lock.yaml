@@ -15,8 +15,8 @@ importers:
         specifier: 16.0.0
         version: 16.0.0(rollup@4.34.9)
       '@rollup/plugin-replace':
-        specifier: 6.0.2
-        version: 6.0.2(rollup@4.34.9)
+        specifier: 6.0.3
+        version: 6.0.3(rollup@4.34.9)
       '@rollup/plugin-typescript':
         specifier: 12.1.2
         version: 12.1.2(rollup@4.34.9)(tslib@2.8.1)(typescript@5.8.2)
@@ -434,6 +434,7 @@ packages:
 
   '@eslint-react/tools@1.17.1':
     resolution: {integrity: sha512-0ZUw3PF70qeBMJLrntmojQLGzy5S05fwor5CxrHIp1MwQoPTphX11WiuCuq5ohHZ+xopqLHASkRrvAPthAalUQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@eslint-react/types@1.17.1':
     resolution: {integrity: sha512-jf9kkRRnV65wCQPdVIGBa81VH4CbN/qULSg6YnErKd4Kgbq6l8Sh54lY8Qlo1jj2LHtzo/nACdyWx1aOgkyuDg==}
@@ -708,8 +709,8 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-replace@6.0.2':
-    resolution: {integrity: sha512-7QaYCf8bqF04dOy7w/eHmJeNExxTYwvKAmlSAH/EaWWUzbT0h5sbF6bktFoX/0F/0qwng5/dWFMyf3gzaM8DsQ==}
+  '@rollup/plugin-replace@6.0.3':
+    resolution: {integrity: sha512-J4RZarRvQAm5IF0/LwUUg+obsm+xZhYnbMXmXROyoSE1ATJe3oXSb9L5MMppdxP2ylNSjv6zFBwKYjcKMucVfA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
@@ -1537,6 +1538,7 @@ packages:
   eslint-plugin-markdown@5.1.0:
     resolution: {integrity: sha512-SJeyKko1K6GwI0AN6xeCDToXDkfKZfXcexA6B+O2Wr2btUS9GrC+YgwSyVli5DJnctUHjFXcQ2cqTaAmVoLi2A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: Please use @eslint/markdown instead
     peerDependencies:
       eslint: '>=8'
 
@@ -1675,6 +1677,7 @@ packages:
   eslint@9.21.0:
     resolution: {integrity: sha512-KjeihdFqTPhOMXTt7StsDxriV4n66ueuF/jfPNC3j/lduHwr/ijDwJMsF+wyMJethgiKi5wniIE243vi07d3pg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -1862,6 +1865,7 @@ packages:
   glob@11.0.0:
     resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globals@14.0.0:
@@ -3868,7 +3872,7 @@ snapshots:
     optionalDependencies:
       rollup: 4.34.9
 
-  '@rollup/plugin-replace@6.0.2(rollup@4.34.9)':
+  '@rollup/plugin-replace@6.0.3(rollup@4.34.9)':
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.34.9)
       magic-string: 0.30.17
